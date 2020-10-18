@@ -1,0 +1,32 @@
+#Code runs in Sage
+
+#setting some bounds larger than the minimum total distance
+
+Wmin3=1000000;
+Wmin4=100000000;
+
+#This code has run for n in {6,7,8,9} (without r=4 for n<8), given the radius and order, it looks to the minimal total distance and saves all graphs attaining it.
+#The extremal graphs are plotted at the end.
+n=9
+for g in graphs(n):
+    r=g.radius()
+    if r==3:
+        W=g.wiener_index();
+        if W<Wmin3:
+            Wmin3=W;
+            D3=[g];
+        elif Wmin3==W:
+            D3.append(g);
+    elif r==4:
+        W=g.wiener_index();
+        if W<Wmin4:
+            Wmin4=W;
+            D4=[g];
+        elif Wmin4==W:
+            D4.append(g);
+Wmin3
+Wmin4
+for k in range(0,len(D3)):
+    D3[k].show()
+for k in range(0,len(D4)):
+    D4[k].show()
