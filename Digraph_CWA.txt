@@ -1,0 +1,52 @@
+
+
+#Make lists of all digraphs of order 6 and radius between 4/2 and 9/2
+L=list(digraphs(6))
+Lc=[]
+for d in L:
+    if d.diameter()<10:
+        Lc.append(d)
+L4=[]
+L5=[]
+L6=[]
+L7=[]
+L8=[]
+L9=[]
+for d in Lc:
+    D=d.reverse()
+    Rad=100
+    for v in d.vertices():
+        Som=d.eccentricity(v)+D.eccentricity(v)
+        if Som<Rad:
+            Rad=Som
+    if Rad==4:
+        L4.append(d)
+    if Rad==5:
+        L5.append(d)
+    if Rad==6:
+        L6.append(d)   
+    if Rad==7:
+        L7.append(d)
+    if Rad==8:
+        L8.append(d)   
+    if Rad==9:
+        L9.append(d) 
+
+#E.g. for radius 7/2 and order 6, we compute the digraphs with minimal total distance as well as the digraphs with the maximum size are computed
+Wmin=1000
+Amax=0
+A7=[]
+W7=[]
+for d in L7:
+    W=d.wiener_index()
+    S=d.size()
+    if W==Wmin:
+        W7.append(d)
+    elif W<Wmin:
+        Wmin=W
+        W7=[d]
+    if S==Amax:
+        A7.append(d)
+    elif S>Amax:
+        Amax=S
+        A7=[d]
